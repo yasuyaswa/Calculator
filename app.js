@@ -1,33 +1,29 @@
-let mode = "both";
+let lastValues = {
+  percent: 0,
+  discount: 0,
+  tax: 0
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const amountInput = document.getElementById("amount");
   const percentageInput = document.getElementById("percentage");
-  const historyBtn = document.getElementById("historyBtn");
-  const clearBtn = document.getElementById("clearHistory");
 
   amountInput.addEventListener("input", calculate);
   percentageInput.addEventListener("input", calculate);
 
-  document.querySelectorAll(".toggle button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      setMode(btn.dataset.mode, btn);
+  document.querySelectorAll(".copy").forEach(card => {
+    card.addEventListener("click", () => {
+      const key = card.dataset.copy;
+      copyToClipboard(lastValues[key], card);
     });
   });
 
-  historyBtn.addEventListener("click", toggleHistory);
-  clearBtn.addEventListener("click", clearHistory);
+  document.getElementById("historyBtn").addEventListener("click", toggleHistory);
+  document.getElementById("clearHistory").addEventListener("click", clearHistory);
 });
 
-function setMode(selected, btn) {
-  mode = selected;
-
-  document
-    .querySelectorAll(".toggle button")
-    .forEach(b => b.classList.remove("active"));
-
-  btn.classList.add("active");
-  calculate();
+function formatNumber(num) {
+  return Number.isInteger(num) ? num : parseFloat(num.toFixed(2));
 }
 
 function calculate() {
@@ -40,22 +36,26 @@ function calculate() {
   const discount = amount - percent;
   const tax = amount + percent;
 
-  document.getElementById("percentValue").innerText = `₹${percent.toFixed(2)}`;
-  document.getElementById("discountValue").innerText = `₹${discount.toFixed(2)}`;
-  document.getElementById("taxValue").innerText = `₹${tax.toFixed(2)}`;
+  lastValues.percent = formatNumber(percent);
+  lastValues.discount = formatNumber(discount);
+  lastValues.tax = formatNumber(tax);
 
-  document.getElementById("discountCard").style.display =
-    mode === "tax" ? "none" : "block";
+  document.getElementById("percentValue").innerText = `₹${lastValues.percent}`;
+  document.getElementById("discountValue").innerText = `₹${lastValues.discount}`;
+  document.getElementById("taxValue").innerText = `₹${lastValues.tax}`;
 
-  document.getElementById("taxCard").style.display =
-    mode === "discount" ? "none" : "block";
+  saveHistory(amount, percentage, lastValues.percent);
+}
 
-  saveHistory(amount, percentage, percent);
+function copyToClipboard(value, card) {
+  navigator.clipboard.writeText(value.toString());
+  card.classList.add("show");
+  setTimeout(() => card.classList.remove("show"), 800);
 }
 
 function saveHistory(amount, percentage, percent) {
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
-  history.unshift(`₹${amount} @ ${percentage}% → ₹${percent.toFixed(2)}`);
+  history.unshift(`₹${amount} @ ${percentage}% → ₹${percent}`);
   history = history.slice(0, 10);
   localStorage.setItem("calcHistory", JSON.stringify(history));
 }
@@ -68,7 +68,6 @@ function toggleHistory() {
 function renderHistory() {
   const list = document.getElementById("historyList");
   list.innerHTML = "";
-
   const history = JSON.parse(localStorage.getItem("calcHistory")) || [];
   history.forEach(h => {
     const li = document.createElement("li");

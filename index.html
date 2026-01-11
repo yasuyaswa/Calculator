@@ -24,30 +24,25 @@
     </div>
   </div>
 
-  <!-- TOGGLE (NO onclick) -->
- <div class="toggle">
-  <button class="active" data-mode="both">Both</button>
-  <button data-mode="discount">Discount</button>
-  <button data-mode="tax">Tax</button>
-</div>
-
-
   <!-- RESULTS -->
   <div class="results">
-    <div class="main-card">
+    <div class="main-card copy" data-copy="percent">
       <p>Percentage Value</p>
       <h1 id="percentValue">₹0</h1>
+      <span class="copied">Copied</span>
     </div>
 
     <div class="row">
-      <div class="sub-card discount" id="discountCard">
+      <div class="sub-card discount copy" data-copy="discount">
         <p>Discount Price</p>
         <h2 id="discountValue">₹0</h2>
+        <span class="copied">Copied</span>
       </div>
 
-      <div class="sub-card tax" id="taxCard">
+      <div class="sub-card tax copy" data-copy="tax">
         <p>Tax Price</p>
         <h2 id="taxValue">₹0</h2>
+        <span class="copied">Copied</span>
       </div>
     </div>
   </div>
@@ -61,7 +56,6 @@
   </div>
 </div>
 
-<!-- defer + cache bust -->
-<script src="app.js?v=3" defer></script>
+<script src="app.js?v=6" defer></script>
 </body>
 </html>

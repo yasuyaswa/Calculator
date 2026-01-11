@@ -6,7 +6,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #22D9F6; /* your chosen color */
+  background: #22D9F6;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 /* INPUTS */
@@ -61,73 +61,42 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(102,126,234,0.18);
 }
 
-/* TOGGLE */
-/* TOGGLE – clean segmented control */
-.toggle {
-  margin-top: 20px;
-  display: flex;
-  background: #f1f5f9;
-  padding: 6px;
-  border-radius: 18px;
-  gap: 6px;
-}
-
-.toggle button {
-  flex: 1;
-  padding: 10px 0;
-  border: none;
-  border-radius: 14px;
-  background: transparent;
-  font-size: 15px;
-  font-weight: 600;
-  color: #555;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-/* Hover (subtle) */
-.toggle button:hover {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-/* Active */
-.toggle button.active {
-  background: white;
-  color: #2563eb;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-}
-
-
-
 /* RESULTS */
 .results {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
+/* MAIN CARD */
 .main-card {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   text-align: center;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 17px;
+  border-radius: 17px;
+  position: relative;
+  cursor: pointer;
 }
 
 .main-card h1 {
-  margin-top: 6px;
-  font-size: 36px;
+  margin-top: 4px;
+  font-size: 30px;
 }
 
+/* ROW */
 .row {
   display: flex;
-  gap: 14px;
-  margin-top: 14px;
+  gap: 12px;
+  margin-top: 12px;
 }
 
+/* SUB CARDS */
 .sub-card {
   flex: 1;
-  padding: 14px;
-  border-radius: 18px;
+  padding: 12px;
+  border-radius: 15px;
   text-align: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .discount {
@@ -138,6 +107,27 @@ input:focus {
 .tax {
   background: linear-gradient(135deg, #fde68a, #f59e0b);
   color: #333;
+}
+
+/* COPY FEEDBACK */
+.copy:active {
+  transform: scale(0.98);
+}
+
+.copied {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 11px;
+  background: rgba(0,0,0,0.2);
+  padding: 3px 6px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.copy.show .copied {
+  opacity: 1;
 }
 
 /* HISTORY */
@@ -173,10 +163,6 @@ input:focus {
 
 .hidden {
   display: none;
-}
-
-ul {
-  padding-left: 18px;
 }
 
 li {
