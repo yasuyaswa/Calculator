@@ -11,6 +11,7 @@
 <div class="app">
   <h1>💸 Smart Calculator</h1>
 
+  <!-- INPUTS -->
   <div class="input-group">
     <div class="field">
       <label>Amount</label>
@@ -23,12 +24,14 @@
     </div>
   </div>
 
+  <!-- TOGGLE (NO onclick) -->
   <div class="toggle">
-    <button class="active" onclick="setMode('both', this)">Both</button>
-    <button onclick="setMode('discount', this)">Discount</button>
-    <button onclick="setMode('tax', this)">Tax</button>
+    <button class="active" data-mode="both">Both</button>
+    <button data-mode="discount">Discount</button>
+    <button data-mode="tax">Tax</button>
   </div>
 
+  <!-- RESULTS -->
   <div class="results">
     <div class="main-card">
       <p>Percentage Value</p>
@@ -48,14 +51,16 @@
     </div>
   </div>
 
-  <button class="history-btn" onclick="toggleHistory()">📜 History</button>
+  <!-- HISTORY -->
+  <button class="history-btn" id="historyBtn">📜 History</button>
 
   <div id="historyBox" class="history-box hidden">
     <ul id="historyList"></ul>
-    <button class="clear" onclick="clearHistory()">Delete History</button>
+    <button class="clear" id="clearHistory">Delete History</button>
   </div>
 </div>
 
-<script src="app.js"></script>
+<!-- defer + cache bust -->
+<script src="app.js?v=3" defer></script>
 </body>
 </html>

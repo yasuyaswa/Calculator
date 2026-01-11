@@ -1,10 +1,23 @@
 let mode = "both";
 
-const amountInput = document.getElementById("amount");
-const percentageInput = document.getElementById("percentage");
+document.addEventListener("DOMContentLoaded", () => {
+  const amountInput = document.getElementById("amount");
+  const percentageInput = document.getElementById("percentage");
+  const historyBtn = document.getElementById("historyBtn");
+  const clearBtn = document.getElementById("clearHistory");
 
-amountInput.addEventListener("input", calculate);
-percentageInput.addEventListener("input", calculate);
+  amountInput.addEventListener("input", calculate);
+  percentageInput.addEventListener("input", calculate);
+
+  document.querySelectorAll(".toggle button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      setMode(btn.dataset.mode, btn);
+    });
+  });
+
+  historyBtn.addEventListener("click", toggleHistory);
+  clearBtn.addEventListener("click", clearHistory);
+});
 
 function setMode(selected, btn) {
   mode = selected;
@@ -18,8 +31,8 @@ function setMode(selected, btn) {
 }
 
 function calculate() {
-  const amount = Number(amountInput.value);
-  const percentage = Number(percentageInput.value);
+  const amount = Number(document.getElementById("amount").value);
+  const percentage = Number(document.getElementById("percentage").value);
 
   if (!amount || !percentage) return;
 
