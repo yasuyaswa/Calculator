@@ -1,20 +1,17 @@
-let lastValues = {
-  percent: 0,
-  discount: 0,
-  tax: 0
+const lastValues = {
+  percent: "",
+  discount: "",
+  tax: ""
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const amountInput = document.getElementById("amount");
-  const percentageInput = document.getElementById("percentage");
-
-  amountInput.addEventListener("input", calculate);
-  percentageInput.addEventListener("input", calculate);
+  document.getElementById("amount").addEventListener("input", calculate);
+  document.getElementById("percentage").addEventListener("input", calculate);
 
   document.querySelectorAll(".copy").forEach(card => {
     card.addEventListener("click", () => {
       const key = card.dataset.copy;
-      copyToClipboard(lastValues[key], card);
+      copyText(lastValues[key], card);
     });
   });
 
@@ -22,23 +19,22 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("clearHistory").addEventListener("click", clearHistory);
 });
 
-function formatNumber(num) {
-  return Number.isInteger(num) ? num : parseFloat(num.toFixed(2));
+function format(num) {
+  return Number.isInteger(num) ? num.toString() : num.toFixed(2);
 }
 
 function calculate() {
   const amount = Number(document.getElementById("amount").value);
   const percentage = Number(document.getElementById("percentage").value);
-
   if (!amount || !percentage) return;
 
   const percent = (amount * percentage) / 100;
   const discount = amount - percent;
   const tax = amount + percent;
 
-  lastValues.percent = formatNumber(percent);
-  lastValues.discount = formatNumber(discount);
-  lastValues.tax = formatNumber(tax);
+  lastValues.percent = format(percent);
+  lastValues.discount = format(discount);
+  lastValues.tax = format(tax);
 
   document.getElementById("percentValue").innerText = `₹${lastValues.percent}`;
   document.getElementById("discountValue").innerText = `₹${lastValues.discount}`;
@@ -47,12 +43,29 @@ function calculate() {
   saveHistory(amount, percentage, lastValues.percent);
 }
 
-function copyToClipboard(value, card) {
-  navigator.clipboard.writeText(value.toString());
-  card.classList.add("show");
-  setTimeout(() => card.classList.remove("show"), 800);
+/* COPY (GitHub Pages safe) */
+function copyText(text, card) {
+  if (!text) return;
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => showCopied(card));
+  } else {
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+    showCopied(card);
+  }
 }
 
+function showCopied(card) {
+  card.classList.add("show");
+  setTimeout(() => card.classList.remove("show"), 900);
+}
+
+/* HISTORY */
 function saveHistory(amount, percentage, percent) {
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
   history.unshift(`₹${amount} @ ${percentage}% → ₹${percent}`);
