@@ -15,12 +15,12 @@
   <div class="input-group">
     <div class="field">
       <label>Amount</label>
-      <input type="text" id="amount" inputmode="numeric" placeholder="Enter amount" />
+      <input type="text" id="amount" inputmode="numeric" />
     </div>
 
     <div class="field">
       <label>Percentage (%)</label>
-      <input type="number" id="percentage" placeholder="%" />
+      <input type="number" id="percentage" />
     </div>
   </div>
 
@@ -29,23 +29,29 @@
 
   <!-- RESULTS -->
   <div class="results">
+
+    <!-- Percentage -->
     <div class="result-card percent copy" data-copy="percent">
       <p>Percentage Value</p>
       <h2 id="percentValue">₹0</h2>
       <span class="copied">Copied</span>
     </div>
 
-    <div class="result-card discount copy" data-copy="discount">
-      <p>Discount Price</p>
-      <h2 id="discountValue">₹0</h2>
-      <span class="copied">Copied</span>
+    <!-- Discount + Tax SIDE BY SIDE -->
+    <div class="row">
+      <div class="result-card discount copy" data-copy="discount">
+        <p>Discount Price</p>
+        <h2 id="discountValue">₹0</h2>
+        <span class="copied">Copied</span>
+      </div>
+
+      <div class="result-card tax copy" data-copy="tax">
+        <p>Tax Price</p>
+        <h2 id="taxValue">₹0</h2>
+        <span class="copied">Copied</span>
+      </div>
     </div>
 
-    <div class="result-card tax copy" data-copy="tax">
-      <p>Tax Price</p>
-      <h2 id="taxValue">₹0</h2>
-      <span class="copied">Copied</span>
-    </div>
   </div>
 
   <!-- HISTORY -->
@@ -56,7 +62,6 @@
     <button class="clear" id="clearHistory">Clear History</button>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     Built with ❤️ using GitHub Pages
   </footer>
