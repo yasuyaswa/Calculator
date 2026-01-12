@@ -5,8 +5,9 @@ const lastValues = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("amount").addEventListener("input", calculate);
-  document.getElementById("percentage").addEventListener("input", calculate);
+  document.getElementById("calcBtn").addEventListener("click", calculate);
+  document.getElementById("historyBtn").addEventListener("click", toggleHistory);
+  document.getElementById("clearHistory").addEventListener("click", clearHistory);
 
   document.querySelectorAll(".copy").forEach(card => {
     card.addEventListener("click", () => {
@@ -14,13 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
       copyText(lastValues[key], card);
     });
   });
-
-  document.getElementById("historyBtn").addEventListener("click", toggleHistory);
-  document.getElementById("clearHistory").addEventListener("click", clearHistory);
 });
 
 function format(num) {
-  return Number.isInteger(num) ? num.toString() : num.toFixed(2);
+  return Number.isInteger(num) ? num : num.toFixed(2);
 }
 
 function calculate() {
@@ -43,28 +41,6 @@ function calculate() {
   saveHistory(amount, percentage, lastValues.percent);
 }
 
-/* COPY (GitHub Pages safe) */
-function copyText(text, card) {
-  if (!text) return;
-
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(() => showCopied(card));
-  } else {
-    const temp = document.createElement("textarea");
-    temp.value = text;
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand("copy");
-    document.body.removeChild(temp);
-    showCopied(card);
-  }
-}
-
-function showCopied(card) {
-  card.classList.add("show");
-  setTimeout(() => card.classList.remove("show"), 900);
-}
-
 /* HISTORY */
 function saveHistory(amount, percentage, percent) {
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
@@ -81,8 +57,7 @@ function toggleHistory() {
 function renderHistory() {
   const list = document.getElementById("historyList");
   list.innerHTML = "";
-  const history = JSON.parse(localStorage.getItem("calcHistory")) || [];
-  history.forEach(h => {
+  (JSON.parse(localStorage.getItem("calcHistory")) || []).forEach(h => {
     const li = document.createElement("li");
     li.innerText = h;
     list.appendChild(li);
@@ -92,4 +67,12 @@ function renderHistory() {
 function clearHistory() {
   localStorage.removeItem("calcHistory");
   renderHistory();
+}
+
+/* COPY */
+function copyText(text, card) {
+  if (!text) return;
+  navigator.clipboard.writeText(text);
+  card.classList.add("show");
+  setTimeout(() => card.classList.remove("show"), 800);
 }
