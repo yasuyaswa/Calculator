@@ -6,20 +6,20 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #0ea5e9; /* dashboard-like background */
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* APP CARD */
+/* APP */
 .app {
   background: #ffffff;
   width: 380px;
-  max-width: 92vw;
+  max-width: 94vw;
   padding: 24px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  border-radius: 22px;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.2);
 }
 
 /* TITLE */
@@ -36,6 +36,7 @@ h1 {
 
 .field {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -47,45 +48,72 @@ label {
 }
 
 input {
+  width: 100%;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid #e5e7eb;
   font-size: 14px;
 }
 
-/* BUTTON */
+/* CALCULATE */
 .calc-btn {
   margin-top: 16px;
   width: 100%;
-  padding: 12px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 16px;
   border: none;
   background: #2563eb;
   color: white;
   font-size: 15px;
   font-weight: 600;
-  cursor: pointer;
-}
-
-.calc-btn:active {
-  transform: scale(0.98);
 }
 
 /* RESULTS */
 .results {
-  margin-top: 16px;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+/* ROW */
+.row {
+  display: flex;
   gap: 10px;
 }
 
+/* RESULT CARD */
 .result-card {
-  padding: 14px;
-  border-radius: 14px;
+  flex: 1;
   background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  text-align: center;
+  border-radius: 16px;
+  padding: 14px;
   position: relative;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* LEFT ACCENT BAR (inside card) */
+.result-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+}
+
+.percent::before {
+  background: #6366f1;
+}
+
+.discount::before {
+  background: #10b981;
+}
+
+.tax::before {
+  background: #f59e0b;
 }
 
 .result-card p {
@@ -96,19 +124,6 @@ input {
 .result-card h2 {
   margin-top: 6px;
   font-size: 20px;
-}
-
-/* COLOR ACCENTS */
-.percent {
-  border-left: 4px solid #6366f1;
-}
-
-.discount {
-  border-left: 4px solid #10b981;
-}
-
-.tax {
-  border-left: 4px solid #f59e0b;
 }
 
 /* COPY */
@@ -131,20 +146,43 @@ input {
   margin-top: 18px;
   width: 100%;
   padding: 12px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: none;
   background: #111827;
   color: white;
   font-weight: 600;
-  cursor: pointer;
 }
 
 .clear {
   margin-top: 10px;
   width: 100%;
   padding: 10px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: none;
+  background: #ef4444;
+  color: white;
+}
+
+.history-box {
+  margin-top: 12px;
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 14px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+}  border: none;
   background: #ef4444;
   color: white;
 }
