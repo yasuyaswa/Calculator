@@ -20,7 +20,7 @@
 
     <div class="field">
       <label>Percentage (%)</label>
-      <input type="number" id="percentage" />
+      <input type="number" id="percentage" placeholder="%" />
     </div>
   </div>
 
@@ -29,24 +29,22 @@
 
   <!-- RESULTS -->
   <div class="results">
-    <div class="main-card copy" data-copy="percent">
+    <div class="result-card percent copy" data-copy="percent">
       <p>Percentage Value</p>
-      <h1 id="percentValue">₹0</h1>
+      <h2 id="percentValue">₹0</h2>
       <span class="copied">Copied</span>
     </div>
 
-    <div class="row">
-      <div class="sub-card discount copy" data-copy="discount">
-        <p>Discount Price</p>
-        <h2 id="discountValue">₹0</h2>
-        <span class="copied">Copied</span>
-      </div>
+    <div class="result-card discount copy" data-copy="discount">
+      <p>Discount Price</p>
+      <h2 id="discountValue">₹0</h2>
+      <span class="copied">Copied</span>
+    </div>
 
-      <div class="sub-card tax copy" data-copy="tax">
-        <p>Tax Price</p>
-        <h2 id="taxValue">₹0</h2>
-        <span class="copied">Copied</span>
-      </div>
+    <div class="result-card tax copy" data-copy="tax">
+      <p>Tax Price</p>
+      <h2 id="taxValue">₹0</h2>
+      <span class="copied">Copied</span>
     </div>
   </div>
 
@@ -57,6 +55,11 @@
     <ul id="historyList"></ul>
     <button class="clear" id="clearHistory">Clear History</button>
   </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    Built with ❤️ using GitHub Pages
+  </footer>
 </div>
 
 <script src="app.js" defer></script>
