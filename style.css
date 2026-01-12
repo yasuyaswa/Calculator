@@ -1,48 +1,41 @@
 * {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-button {
-  appearance: none;
-  border: none;
-  background: none;
-  cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #22d9f6, #38bdf8);
+  background: #0ea5e9; /* dashboard-like background */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* APP */
+/* APP CARD */
 .app {
   background: #ffffff;
   width: 380px;
   max-width: 92vw;
-  padding: 26px;
-  border-radius: 26px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
 }
 
+/* TITLE */
 h1 {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 /* INPUTS */
 .input-group {
   display: flex;
-  gap: 14px;
+  gap: 12px;
 }
 
 .field {
   flex: 1;
-  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -50,27 +43,28 @@ h1 {
 label {
   font-size: 12px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 input {
   padding: 12px;
-  border-radius: 16px;
-  border: 1px solid #d1d5db;
-  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
 }
 
-/* CALCULATE BUTTON */
+/* BUTTON */
 .calc-btn {
   margin-top: 16px;
   width: 100%;
-  padding: 14px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #2563eb, #4338ca);
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  box-shadow: 0 12px 28px rgba(37,99,235,0.45);
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .calc-btn:active {
@@ -80,50 +74,41 @@ input {
 /* RESULTS */
 .results {
   margin-top: 16px;
-}
-
-/* PERCENTAGE TILE */
-.main-card {
-  padding: 12px;
-  border-radius: 16px;
-  text-align: center;
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-  color: white;
-  box-shadow: 0 10px 25px rgba(79,70,229,0.5);
-  position: relative;
-}
-
-.main-card h1 {
-  font-size: 24px;
-}
-
-/* ROW */
-.row {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 10px;
 }
 
-/* DISCOUNT TILE */
-.sub-card.discount {
-  background: linear-gradient(135deg, #059669, #10b981);
-  color: white;
-  box-shadow: 0 10px 22px rgba(5,150,105,0.45);
-}
-
-/* TAX TILE */
-.sub-card.tax {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
-  color: #1f2933;
-  box-shadow: 0 10px 22px rgba(245,158,11,0.45);
-}
-
-.sub-card {
-  flex: 1;
-  padding: 10px;
-  border-radius: 16px;
+.result-card {
+  padding: 14px;
+  border-radius: 14px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
   text-align: center;
   position: relative;
+}
+
+.result-card p {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.result-card h2 {
+  margin-top: 6px;
+  font-size: 20px;
+}
+
+/* COLOR ACCENTS */
+.percent {
+  border-left: 4px solid #6366f1;
+}
+
+.discount {
+  border-left: 4px solid #10b981;
+}
+
+.tax {
+  border-left: 4px solid #f59e0b;
 }
 
 /* COPY */
@@ -133,6 +118,7 @@ input {
   left: 50%;
   transform: translateX(-50%);
   font-size: 11px;
+  color: #10b981;
   opacity: 0;
 }
 
@@ -142,9 +128,47 @@ input {
 
 /* HISTORY */
 .history-btn {
-  margin-top: 16px;
+  margin-top: 18px;
   width: 100%;
   padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: #111827;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clear {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: #ef4444;
+  color: white;
+}
+
+.history-box {
+  margin-top: 12px;
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 14px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+}  padding: 12px;
   border-radius: 16px;
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
