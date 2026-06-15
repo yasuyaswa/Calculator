@@ -1,62 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <title>Smart Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="shortcut icon" href="favicon.svg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="app">
-  <h1>💸 Smart Calculator</h1>
+<div class="bg-mesh">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
 
-  <!-- INPUTS -->
+<div class="app">
+
+  <header class="app-header">
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" opacity="0.15"/>
+        <path d="M7 8h4M7 12h10M7 16h4M15 8h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      Smart Calc
+    </div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+      <svg class="sun-icon" width="17" height="17" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="moon-icon" width="17" height="17" viewBox="0 0 24 24" fill="none">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <h1 class="app-title">Percentage <span>Calculator</span></h1>
+  <p class="app-subtitle">Instant discount, tax &amp; percentage results</p>
+
   <div class="input-group">
     <div class="field">
-      <label>Amount</label>
-      <input type="text" id="amount" inputmode="numeric" placeholder="Enter amount" />
+      <label for="amount">Amount (&#8377;)</label>
+      <div class="input-wrap">
+        <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <path d="M6 3h12M6 8h12M9 3v18l3-3 3 3V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <input type="text" id="amount" inputmode="numeric" placeholder="0" autocomplete="off" />
+      </div>
     </div>
 
+    <div class="at-divider">@</div>
+
     <div class="field">
-      <label>Percentage (%)</label>
-      <input type="number" id="percentage" />
+      <label for="percentage">Rate (%)</label>
+      <div class="input-wrap">
+        <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <path d="M19 5L5 19M9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM20 17.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="number" id="percentage" placeholder="0" min="0" max="100" autocomplete="off" />
+      </div>
     </div>
   </div>
 
-  <!-- CALCULATE -->
-  <button class="calc-btn" id="calcBtn">Calculate</button>
+  <button class="calc-btn" id="calcBtn">
+    <span>Calculate</span>
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" class="btn-arrow">
+      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 
-  <!-- RESULTS -->
-  <div class="results">
+  <div class="results" id="results">
     <div class="main-card copy" data-copy="percent">
-      <p>Percentage Value</p>
-      <h1 id="percentValue">₹0</h1>
-      <span class="copied">Copied</span>
+      <div class="card-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M19 5L5 19M9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM20 17.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Percentage Value
+      </div>
+      <div class="card-value" id="percentValue">&#8377;0</div>
+      <div class="copy-hint">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" class="copy-icon">
+          <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="copy-label">Tap to copy</span>
+        <span class="copied-label">&#10003; Copied!</span>
+      </div>
     </div>
 
     <div class="row">
       <div class="sub-card discount copy" data-copy="discount">
-        <p>Discount Price</p>
-        <h2 id="discountValue">₹0</h2>
-        <span class="copied">Copied</span>
+        <div class="card-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M20 12V22H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Discount Price
+        </div>
+        <div class="card-value" id="discountValue">&#8377;0</div>
+        <div class="copy-hint">
+          <span class="copy-label">Tap to copy</span>
+          <span class="copied-label">&#10003; Copied</span>
+        </div>
       </div>
 
       <div class="sub-card tax copy" data-copy="tax">
-        <p>Tax Price</p>
-        <h2 id="taxValue">₹0</h2>
-        <span class="copied">Copied</span>
+        <div class="card-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M14 2v6h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Tax Price
+        </div>
+        <div class="card-value" id="taxValue">&#8377;0</div>
+        <div class="copy-hint">
+          <span class="copy-label">Tap to copy</span>
+          <span class="copied-label">&#10003; Copied</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- HISTORY -->
-  <button class="history-btn" id="historyBtn">📜 History</button>
+  <button class="history-btn" id="historyBtn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+      <path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    History
+    <span class="history-count" id="historyCount">0</span>
+  </button>
 
   <div id="historyBox" class="history-box hidden">
+    <div class="history-header">
+      <span>Recent Calculations</span>
+      <button class="clear-btn" id="clearHistory">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Clear
+      </button>
+    </div>
     <ul id="historyList"></ul>
-    <button class="clear" id="clearHistory">Clear History</button>
   </div>
+
+
+  <footer class="footer">
+    <span class="heart">&#10084;&#65039;</span>
+    Built with
+    <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+      GitHub Pages
+    </a>
+  </footer>
 </div>
 
 <script src="app.js" defer></script>
